@@ -78,13 +78,13 @@ const GameArea = forwardRef((props, ref) => {
     if (gameDiv) {
         gameDiv.addEventListener('click', handleFlap);
     }
-    window.addEventListener('touchstart', handleKeyPress);
+    window.addEventListener('touchstart', handleFlap);
 
     return () => {
       if (gameDiv) {
         gameDiv.removeEventListener('click', handleFlap);
       }
-      window.removeEventListener('touchstart', handleKeyPress);
+      window.removeEventListener('touchstart', handleFlap);
     };
   }, [handleFlap, status]);
 
@@ -212,6 +212,6 @@ const GameArea = forwardRef((props, ref) => {
       )}
     </div>
   );
-};
+}
 
 export default GameArea;
