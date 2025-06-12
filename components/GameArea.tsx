@@ -1,4 +1,5 @@
 
+import React, { forwardRef, useImperativeHandle } from 'react';
 import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { Pipe, GameStatus } from '../types';
 import {
@@ -13,7 +14,7 @@ import ScoreDisplay from './ScoreDisplay';
 import GameOverScreen from './GameOverScreen';
 import Background from './Background';
 
-const GameArea: React.FC = () => {
+const GameArea = forwardRef((props, ref) => {
   const [status, setStatus] = useState<GameStatus>(GameStatus.Ready);
   const [pigY, setPigY] = useState<number>(GAME_HEIGHT / 2 - PIG_SIZE_H / 2);
   const [pigVelocity, setPigVelocity] = useState<number>(0);
@@ -77,13 +78,13 @@ const GameArea: React.FC = () => {
     if (gameDiv) {
         gameDiv.addEventListener('click', handleFlap);
     }
-    window.addEventListener('keydown', handleKeyPress);
+    window.addEventListener('touchstart', handleKeyPress);
 
     return () => {
       if (gameDiv) {
         gameDiv.removeEventListener('click', handleFlap);
       }
-      window.removeEventListener('keydown', handleKeyPress);
+      window.removeEventListener('touchstart', handleKeyPress);
     };
   }, [handleFlap, status]);
 
